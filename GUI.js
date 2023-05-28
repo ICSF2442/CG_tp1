@@ -4,7 +4,9 @@ class GUI {
     this.table1 = new MyTable(30, 12, 1.1, 30);
     this.inclinacao1 = 15 * Math.PI / 180;
     this.inclinacao2 = -this.inclinacao1/4;
+    this.inclinacao90graus = 90 * Math.PI / 180;
     this.group = new THREE.Group();
+     this.Apoio1 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1,false,false )
     
     
     var guiVars = {
@@ -84,18 +86,18 @@ class GUI {
         var groupoE1 = new THREE.Group();
         this.webgl.scene.add(new THREE.AxisHelper(20));
 
-        var Estante1 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura);
-        var Estante2 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura);
-        var Estante3 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura);
+        var Estante1 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
+        var Estante2 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
+        var Estante3 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
 
-        var Estanteblock1 = new Estante(0,4*this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura);
-        var Estanteblock2 = new Estante(0,4*this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura);
-        var Estanteblock3 = new Estante(0,4*this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura);
+        var Estanteblock1 = new Estante(0,4*this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
+        var Estanteblock2 = new Estante(0,4*this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
+        var Estanteblock3 = new Estante(0,4*this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
 
-        var Apoio1 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  )
-        var Apoio2 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  )
-        var Apoio3 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  )
-        var Apoio4 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  )
+        var Apoio1 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  ,false,false)
+        var Apoio2 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  ,false,false)
+        var Apoio3 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  ,false,false)
+        var Apoio4 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  ,false,false)
 
         groupoE1.add(Estante1);
         groupoE1.add(Estante2);
@@ -195,6 +197,37 @@ class GUI {
 
       },
       "drawArmazem": () =>{
+      var armazemChao = new Estante(15*this.table1.largura,1.1,15*this.table1.largura,false,true); //Chao
+      armazemChao.translateY(-this.Apoio1.altura/4);
+
+      var armazemParede1 = new Estante(1.1,8*this.table1.largura,15*this.table1.largura,false,true); //Parede de trás
+      armazemParede1.translateX(15*this.table1.largura/2);
+      armazemParede1.translateY((8*this.table1.largura/2)-this.Apoio1.altura/4);
+
+       var armazemParede2 = new Estante(15*this.table1.largura,8*this.table1.largura,1.1,false,true); //Parede da direita
+       armazemParede2.translateY((8*this.table1.largura/2)-this.Apoio1.altura/4);
+       armazemParede2.translateZ(15*this.table1.largura/2);
+
+      var armazemParede3 = new Estante(15*this.table1.largura,8*this.table1.largura,1.1,false,true); //Parede da esquerda
+      armazemParede3.translateY((8*this.table1.largura/2)-this.Apoio1.altura/4);
+      armazemParede3.translateZ(-15*this.table1.largura/2);
+
+      var armazemTeto = new Estante(15*this.table1.largura,1.1,15*this.table1.largura,true,true); //Teto
+      armazemTeto.translateY(8*this.table1.largura-this.Apoio1.altura/4);
+
+       var armazemFrente = new Estante(1.1,8*this.table1.largura,15*this.table1.largura,true,true); //Parede da frente
+       armazemFrente.translateX(-15*this.table1.largura/2);
+       armazemFrente.translateY((8*this.table1.largura/2)-this.Apoio1.altura/4);
+
+
+      var GroupArmazem = new THREE.Group();
+      GroupArmazem.add(armazemChao);
+      GroupArmazem.add(armazemParede1);
+      GroupArmazem.add(armazemParede2);
+      GroupArmazem.add(armazemParede3);
+      GroupArmazem.add(armazemTeto);
+      GroupArmazem.add(armazemFrente);
+      this.webgl.scene.add(GroupArmazem);
 
       },
       "PerspectiveCamera": () => {
