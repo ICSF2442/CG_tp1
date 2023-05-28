@@ -11,13 +11,7 @@ class Estante extends THREE.Object3D {
     this.altura = altura;
     this.profundidade = profundidade;
 
-    var base1 = Estante.createMesh(new THREE.CubeGeometry(largura, altura , profundidade)); 
-    
-    
-
-    
-    
-
+    var base1 = Estante.createMesh(new THREE.CubeGeometry(largura, altura , profundidade));
     this.add(base1);
     
     

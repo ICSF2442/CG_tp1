@@ -29,20 +29,12 @@ class GUI {
         var table5 = new MyTable(30, 12, 1.1, 30);
         var table6 = new MyTable(30, 12, 1.1, 30);
 
-
-
-        
-        
-
-      
         //1º andar
         table2.translateX( table1.largura + table1.largura/4 );
         group.add(table1);
         group.add(table2);
         group.rotation.z += inclinacao1;
         
-        
-
 
         //2º andar
         table3.translateY(table1.altura + table1.altura/2 );
@@ -64,10 +56,6 @@ class GUI {
 
         table6.translateX( table3.largura + 2*table3.largura/4 + table2.largura);
         table6.translateY(3*table2.altura + 2*table2.altura );
-
-       
-
-        
 
         group3.add(table5);
         group3.add(table6);
@@ -206,6 +194,7 @@ class GUI {
 
 
       },
+
       "PerspectiveCamera": () => {
         var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.x = 180;
@@ -241,12 +230,7 @@ class GUI {
         var orbitControls = new THREE.OrbitControls(this.webgl.camera);
         orbitControls.autoRotate = true;
         this.webgl.orbitControls = orbitControls;
-        
-        
-        
 
-        
-        
     },
 
       "Firstperson" : () =>{
@@ -290,7 +274,8 @@ class GUI {
     var gui = new dat.GUI({ autoPlace: false });
     var cleanScene = gui.add(guiVars, 'cleanScene');
     var drawTables = gui.add(guiVars, 'drawBox');
-    var drawEstante = gui.add(guiVars,'drawEstante'); 
+    var drawEstante = gui.add(guiVars,'drawEstante');
+    
     var perspectiveCamera = gui.add(guiVars, 'PerspectiveCamera');
     var OrthographicCamera = gui.add(guiVars, 'OrthographicCamera');
     var Trackball = gui.add(guiVars, 'Trackball');
