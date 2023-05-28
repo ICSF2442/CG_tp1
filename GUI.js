@@ -89,6 +89,8 @@ class GUI {
 
         var Apoio1 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  )
         var Apoio2 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  )
+        var Apoio3 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  )
+        var Apoio4 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  )
         //1º andar
         //prateleira
         Estante1.rotation.z += this.inclinacao1;
@@ -141,13 +143,25 @@ class GUI {
         
 
         //Apoios
-        Apoio1.translateX(Estante1.largura/1.5)
-        Apoio1.translateY(Apoio1.altura/4)
+        Apoio1.translateX(Estante1.largura/1.5);
+        Apoio1.translateY(Apoio1.altura/4);
+        Apoio1.translateZ(-2*this.table1.profundidade);
         this.webgl.scene.add(Apoio1);
 
         Apoio2.translateX(Estante1.largura/4)
         Apoio2.translateY(Apoio2.altura/4)
+        Apoio2.translateZ(-2*this.table1.profundidade);
         this.webgl.scene.add(Apoio2);
+
+        Apoio3.translateX(Estante1.largura/1.5);
+        Apoio3.translateY(Apoio1.altura/4);
+        Apoio3.translateZ(Estante1.profundidade - Apoio3.profundidade);
+        this.webgl.scene.add(Apoio3);
+
+        Apoio4.translateX(Estante1.largura/4)
+        Apoio4.translateY(Apoio2.altura/4)
+        Apoio4.translateZ( Estante1.profundidade - Apoio3.profundidade);
+        this.webgl.scene.add(Apoio4);
 
 
       },
