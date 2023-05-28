@@ -194,15 +194,9 @@ class GUI {
 
 
       },
-<<<<<<< HEAD
-
-=======
       "drawArmazem": () =>{
 
       },
-
-      
->>>>>>> origin/main
       "PerspectiveCamera": () => {
         var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.x = 180;
@@ -282,13 +276,8 @@ class GUI {
     var gui = new dat.GUI({ autoPlace: false });
     var cleanScene = gui.add(guiVars, 'cleanScene');
     var drawTables = gui.add(guiVars, 'drawBox');
-<<<<<<< HEAD
     var drawEstante = gui.add(guiVars,'drawEstante');
-    
-=======
-    var drawEstante = gui.add(guiVars,'drawEstante'); 
     var drawArmazem = gui.add(guiVars, 'drawArmazem');
->>>>>>> origin/main
     var perspectiveCamera = gui.add(guiVars, 'PerspectiveCamera');
     var OrthographicCamera = gui.add(guiVars, 'OrthographicCamera');
     var Trackball = gui.add(guiVars, 'Trackball');
