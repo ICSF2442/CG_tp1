@@ -1,8 +1,8 @@
 class GUI {
   constructor(webgl) {
     this.webgl = webgl;
-    this.table1 = new MyTable(30, 12, 1.1, 30);
-    this.inclinacao1 = 15 * Math.PI / 180;
+    this.table1 = new MyTable(40, 6.5, 1, 20);
+    this.inclinacao1 = 3 * Math.PI / 180;
     this.inclinacao2 = -this.inclinacao1/4;
     this.inclinacao90graus = 90 * Math.PI / 180;
     this.group = new THREE.Group();
@@ -23,13 +23,13 @@ class GUI {
         var inclinacao2 = -inclinacao1/4;
         this.webgl.scene.add(new THREE.AxisHelper(20));
         var table1 = this.table1;
-        var table2 = new MyTable(30, 12, 1.1, 30);
+        var table2 = new MyTable(40, 6.5, 1, 20);
         
-        var table3 = new MyTable(30, 12, 1.1, 30);
-        var table4 = new MyTable(30, 12, 1.1, 30);
+        var table3 = new MyTable(40, 6.5, 1, 20);
+        var table4 = new MyTable(40, 6.5, 1, 20);
 
-        var table5 = new MyTable(30, 12, 1.1, 30);
-        var table6 = new MyTable(30, 12, 1.1, 30);
+        var table5 = new MyTable(40, 6.5, 1, 20);
+        var table6 = new MyTable(40, 6.5, 1, 20);
 
         //1º andar
         table2.translateX( table1.largura + table1.largura/4 );

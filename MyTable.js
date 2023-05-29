@@ -20,7 +20,7 @@ class MyTable extends THREE.Object3D {
     ladobase.position.x+= ladog1.position.x;
     ladobase.position.y -= altura/2 - profundidade/2 ;
     ladobase.position.z+=espessura/2 + profundidade/2 ;
-    ladobase.rotation.y += inclinacao;
+    
     
     
     
@@ -32,14 +32,16 @@ class MyTable extends THREE.Object3D {
     ladog2.position.x= ladog1.position.x;
     ladog2.position.z= profundidade + espessura;
 
-    var ladp1= MyTable.createMesh(new THREE.CubeGeometry(largura , altura, profundidade)); 
+    var ladp1= MyTable.createMesh(new THREE.CubeGeometry(espessura, altura-profundidade, profundidade)); 
     ladp1.rotation.y += inclinacao  ;
-    ladp1.position.z+= largura/2 + profundidade/2   ;
+    ladp1.position.y += profundidade/2;
+    ladp1.position.z+= espessura/2 + profundidade/2  ;
     ladp1.position.x+= largura/2 - profundidade/2;
 
-    var ladp2= MyTable.createMesh(new THREE.CubeGeometry(largura , altura, profundidade)); 
+    var ladp2= MyTable.createMesh(new THREE.CubeGeometry(espessura , altura-profundidade, profundidade)); 
     ladp2.rotation.y += inclinacao  ;
-    ladp2.position.z+= largura/2 + profundidade/2   ;
+    ladp2.position.y += profundidade/2;
+    ladp2.position.z+= espessura/2 + profundidade/2;
     ladp2.position.x-= largura/2 - profundidade/2;
 
     
