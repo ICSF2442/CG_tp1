@@ -1,11 +1,27 @@
 class GUI {
   constructor(webgl) {
     this.webgl = webgl;
+
+    //Caixas
     this.table1 = new MyTable(40, 6.5, 1, 20);
+    this.table2 = new MyTable(40, 6.5, 1, 20);
+    this.table3 = new MyTable(40, 6.5, 1, 20);
+    this.table4 = new MyTable(40, 6.5, 1, 20);
+    this.table5 = new MyTable(40, 6.5, 1, 20);
+    this.table6 = new MyTable(40, 6.5, 1, 20);
+
+    //inclinação
     this.inclinacao1 = 3 * Math.PI / 180;
     this.inclinacao2 = -this.inclinacao1/4;
     this.inclinacao90graus = 90 * Math.PI / 180;
+
+    //grupos
     this.group = new THREE.Group();
+    this.group2 = new THREE.Group();
+    this.group3 = new THREE.Group();
+    this.grouptotal = new THREE.Group();
+
+
      this.Apoio1 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1,false,false )
     
     
@@ -15,27 +31,33 @@ class GUI {
           this.webgl.scene.remove(this.webgl.scene.children[i]);
       },
       "drawBox": () => {
-        var group = this.group;
-        var group2 = new THREE.Group();
-        var group3 = new THREE.Group();
-        var grouptotal = new THREE.Group();
+        
+        
+        this.webgl.scene.add(this.table1);
+
+      },
+
+      "drawEstante": () =>{
+        var groupoE1 = new THREE.Group();
+        this.webgl.scene.add(new THREE.AxisHelper(20));
+
         var inclinacao1 = this.inclinacao1;
         var inclinacao2 = -inclinacao1/4;
         this.webgl.scene.add(new THREE.AxisHelper(20));
         var table1 = this.table1;
-        var table2 = new MyTable(40, 6.5, 1, 20);
+        var table2 = this.table2;
         
-        var table3 = new MyTable(40, 6.5, 1, 20);
-        var table4 = new MyTable(40, 6.5, 1, 20);
+        var table3 = this.table3;
+        var table4 = this.table4;
 
-        var table5 = new MyTable(40, 6.5, 1, 20);
-        var table6 = new MyTable(40, 6.5, 1, 20);
+        var table5 = this.table5;
+        var table6 = this.table6;
 
         //1º andar
-        table2.translateX( table1.largura + table1.largura/4 );
-        group.add(table1);
-        group.add(table2);
-        group.rotation.z += inclinacao1;
+        this.table2.translateX( table1.largura + table1.largura/4 );
+        this.group.add(table1);
+        this.group.add(table2);
+        this.group.rotation.z = inclinacao1;
         
 
         //2º andar
@@ -46,9 +68,9 @@ class GUI {
         
         table4.translateY(table2.altura + table2.altura/2);
 
-        group2.add(table3);
-        group2.add(table4);
-        group2.rotation.z += inclinacao1;
+        this.group2.add(table3);
+        this.group2.add(table4);
+        this.group2.rotation.z = inclinacao1;
         
 
         //3º andar
@@ -59,32 +81,27 @@ class GUI {
         table6.translateX( table3.largura + 2*table3.largura/4 + table2.largura);
         table6.translateY(3*table2.altura + 2*table2.altura );
 
-        group3.add(table5);
-        group3.add(table6);
-        group3.rotation.z +=inclinacao2;
+        this.group3.add(table5);
+        this.group3.add(table6);
+        this.group3.rotation.z =inclinacao2;
         
 
-        grouptotal.add(group);
-        grouptotal.add(group2);
-        grouptotal.add(group3);
+        this.grouptotal.add(this.group);
+        this.grouptotal.add(this.group2);
+        this.grouptotal.add(this.group3);
 
-        this.webgl.scene.add(grouptotal);
+        this.webgl.scene.add(this.grouptotal);
 
 
-        var grouptotal2 = grouptotal.clone();
+        var grouptotal2 = this.grouptotal.clone();
         grouptotal2.translateZ(2*table1.largura);
         this.webgl.scene.add(grouptotal2);
 
 
-        var grouptotal3 = grouptotal.clone();
+        var grouptotal3 = this.grouptotal.clone();
         grouptotal3.translateZ(4*table1.largura);
         this.webgl.scene.add(grouptotal3);
 
-      },
-
-      "drawEstante": () =>{
-        var groupoE1 = new THREE.Group();
-        this.webgl.scene.add(new THREE.AxisHelper(20));
 
         var Estante1 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
         var Estante2 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
@@ -113,13 +130,13 @@ class GUI {
         groupoE1.add(Apoio4);
         //1º andar
         //prateleira
-        Estante1.rotation.z += this.inclinacao1;
+        Estante1.rotation.z = this.inclinacao1;
         Estante1.translateX(this.table1.largura + this.table1.largura/2);
         Estante1.translateZ(this.table1.espessura/2 + this.table1.profundidade/2); 
         Estante1.translateY(-this.table1.altura/2);
 
         //block1
-        Estanteblock1.rotation.z += this.inclinacao1;
+        Estanteblock1.rotation.z = this.inclinacao1;
         Estanteblock1.translateZ(this.table1.espessura/2 + this.table1.profundidade/2);
         Estanteblock1.translateX(-this.table1.largura + this.table1.largura/4); 
         Estanteblock1.translateY(-this.table1.altura/2 + 2*this.table1.profundidade);
@@ -129,28 +146,28 @@ class GUI {
         
 
         //2º andar
-        Estante2.rotation.z += this.inclinacao1;
+        Estante2.rotation.z = this.inclinacao1;
         Estante2.translateX(this.table1.largura + this.table1.largura/2 + this. table1.largura);
         Estante2.translateZ(this.table1.espessura/2 + this.table1.profundidade/2); 
         Estante2.translateY(-this.table1.altura/2 + this.table1.altura + this.table1.altura/2);
         
 
         //block2
-        Estanteblock2.rotation.z += this.inclinacao1;
+        Estanteblock2.rotation.z = this.inclinacao1;
         Estanteblock2.translateX(this. table1.largura/4);
         Estanteblock2.translateZ(this.table1.espessura/2 + this.table1.profundidade/2); 
         Estanteblock2.translateY(-this.table1.altura/2 + this.table1.altura + this.table1.altura/2 + 2*this.table1.profundidade);
         
         
         //3º andar
-        Estante3.rotation.z += this.inclinacao2;
+        Estante3.rotation.z = this.inclinacao2;
         Estante3.translateX(this.table1.largura);
         Estante3.translateZ(this.table1.espessura/2 + this.table1.profundidade/2); 
         Estante3.translateY(-this.table1.altura/2 + 3*this.table1.altura + 2*this.table1.altura );
        
 
         //block3
-        Estanteblock3.rotation.z += this.inclinacao2;
+        Estanteblock3.rotation.z = this.inclinacao2;
         Estanteblock3.translateX(3*this.table1.largura + this.table1.largura/4);
         Estanteblock3.translateZ(this.table1.espessura/2 + this.table1.profundidade/2); 
         Estanteblock3.translateY(-this.table1.altura/2 + 3*this.table1.altura + 2*this.table1.altura+ 2*this.table1.profundidade);
@@ -228,6 +245,179 @@ class GUI {
       GroupArmazem.add(armazemTeto);
       GroupArmazem.add(armazemFrente);
       this.webgl.scene.add(GroupArmazem);
+
+      var groupoE1 = new THREE.Group();
+        this.webgl.scene.add(new THREE.AxisHelper(20));
+
+        var inclinacao1 = this.inclinacao1;
+        var inclinacao2 = -inclinacao1/4;
+        this.webgl.scene.add(new THREE.AxisHelper(20));
+        var table1 = this.table1;
+        var table2 = this.table2;
+        
+        var table3 = this.table3;
+        var table4 = this.table4;
+
+        var table5 = this.table5;
+        var table6 = this.table6;
+
+        //1º andar
+        this.table2.translateX( table1.largura + table1.largura/4 );
+        this.group.add(table1);
+        this.group.add(table2);
+        this.group.rotation.z = inclinacao1;
+        
+
+        //2º andar
+        table3.translateY(table1.altura + table1.altura/2 );
+        table3.translateX(table2.largura );
+
+        table4.translateX( table3.largura + table3.largura/4 + table2.largura);
+        
+        table4.translateY(table2.altura + table2.altura/2);
+
+        this.group2.add(table3);
+        this.group2.add(table4);
+        this.group2.rotation.z = inclinacao1;
+        
+
+        //3º andar
+
+        table5.translateY(3*table1.altura + 2*table1.altura  );
+        table5.translateX(table2.largura + table3.largura/4 );
+
+        table6.translateX( table3.largura + 2*table3.largura/4 + table2.largura);
+        table6.translateY(3*table2.altura + 2*table2.altura );
+
+        this.group3.add(table5);
+        this.group3.add(table6);
+        this.group3.rotation.z =inclinacao2;
+        
+
+        this.grouptotal.add(this.group);
+        this.grouptotal.add(this.group2);
+        this.grouptotal.add(this.group3);
+
+        this.webgl.scene.add(this.grouptotal);
+
+
+        var grouptotal2 = this.grouptotal.clone();
+        grouptotal2.translateZ(2*table1.largura);
+        this.webgl.scene.add(grouptotal2);
+
+
+        var grouptotal3 = this.grouptotal.clone();
+        grouptotal3.translateZ(4*table1.largura);
+        this.webgl.scene.add(grouptotal3);
+
+
+        var Estante1 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
+        var Estante2 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
+        var Estante3 = new Estante(4.5*this.table1.largura,this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
+
+        var Estanteblock1 = new Estante(0,4*this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
+        var Estanteblock2 = new Estante(0,4*this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
+        var Estanteblock3 = new Estante(0,4*this.table1.profundidade,4*this.table1.profundidade +this.table1.espessura,false,false);
+
+        var Apoio1 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  ,false,false)
+        var Apoio2 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  ,false,false)
+        var Apoio3 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  ,false,false)
+        var Apoio4 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1  ,false,false)
+
+        groupoE1.add(Estante1);
+        groupoE1.add(Estante2);
+        groupoE1.add(Estante3);
+
+        groupoE1.add(Estanteblock1);
+        groupoE1.add(Estanteblock2);
+        groupoE1.add(Estanteblock3);
+
+        groupoE1.add(Apoio1);
+        groupoE1.add(Apoio2);
+        groupoE1.add(Apoio3);
+        groupoE1.add(Apoio4);
+        //1º andar
+        //prateleira
+        Estante1.rotation.z = this.inclinacao1;
+        Estante1.translateX(this.table1.largura + this.table1.largura/2);
+        Estante1.translateZ(this.table1.espessura/2 + this.table1.profundidade/2); 
+        Estante1.translateY(-this.table1.altura/2);
+
+        //block1
+        Estanteblock1.rotation.z = this.inclinacao1;
+        Estanteblock1.translateZ(this.table1.espessura/2 + this.table1.profundidade/2);
+        Estanteblock1.translateX(-this.table1.largura + this.table1.largura/4); 
+        Estanteblock1.translateY(-this.table1.altura/2 + 2*this.table1.profundidade);
+        
+        
+        
+        
+
+        //2º andar
+        Estante2.rotation.z = this.inclinacao1;
+        Estante2.translateX(this.table1.largura + this.table1.largura/2 + this. table1.largura);
+        Estante2.translateZ(this.table1.espessura/2 + this.table1.profundidade/2); 
+        Estante2.translateY(-this.table1.altura/2 + this.table1.altura + this.table1.altura/2);
+        
+
+        //block2
+        Estanteblock2.rotation.z = this.inclinacao1;
+        Estanteblock2.translateX(this. table1.largura/4);
+        Estanteblock2.translateZ(this.table1.espessura/2 + this.table1.profundidade/2); 
+        Estanteblock2.translateY(-this.table1.altura/2 + this.table1.altura + this.table1.altura/2 + 2*this.table1.profundidade);
+        
+        
+        //3º andar
+        Estante3.rotation.z = this.inclinacao2;
+        Estante3.translateX(this.table1.largura);
+        Estante3.translateZ(this.table1.espessura/2 + this.table1.profundidade/2); 
+        Estante3.translateY(-this.table1.altura/2 + 3*this.table1.altura + 2*this.table1.altura );
+       
+
+        //block3
+        Estanteblock3.rotation.z = this.inclinacao2;
+        Estanteblock3.translateX(3*this.table1.largura + this.table1.largura/4);
+        Estanteblock3.translateZ(this.table1.espessura/2 + this.table1.profundidade/2); 
+        Estanteblock3.translateY(-this.table1.altura/2 + 3*this.table1.altura + 2*this.table1.altura+ 2*this.table1.profundidade);
+
+       
+        
+
+        //Apoios
+        Apoio1.translateX(Estante1.largura/1.5);
+        Apoio1.translateY(Apoio1.altura/4);
+        Apoio1.translateZ(-2*this.table1.profundidade);
+        
+
+        Apoio2.translateX(Estante1.largura/4)
+        Apoio2.translateY(Apoio2.altura/4)
+        Apoio2.translateZ(-2*this.table1.profundidade);
+        
+
+        Apoio3.translateX(Estante1.largura/1.5);
+        Apoio3.translateY(Apoio1.altura/4);
+        Apoio3.translateZ(Estante1.profundidade - Apoio3.profundidade);
+       
+
+        Apoio4.translateX(Estante1.largura/4)
+        Apoio4.translateY(Apoio2.altura/4)
+        Apoio4.translateZ( Estante1.profundidade - Apoio3.profundidade);
+
+
+
+        this.webgl.scene.add(groupoE1);
+
+        //2º estante
+        var groupE2 = groupoE1.clone();
+        groupE2.translateZ(2*this.table1.largura)
+        this.webgl.scene.add(groupE2);
+
+        
+
+        //3º estante
+        var groupE3 = groupoE1.clone();
+        groupE3.translateZ(4*this.table1.largura)
+        this.webgl.scene.add(groupE3);
 
       },
       "PerspectiveCamera": () => {
