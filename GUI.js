@@ -4,11 +4,7 @@ class GUI {
 
     //Caixas
     this.table1 = new MyTable(40, 6.5, 1, 20);
-    this.table2 = new MyTable(40, 6.5, 1, 20);
-    this.table3 = new MyTable(40, 6.5, 1, 20);
-    this.table4 = new MyTable(40, 6.5, 1, 20);
-    this.table5 = new MyTable(40, 6.5, 1, 20);
-    this.table6 = new MyTable(40, 6.5, 1, 20);
+    
 
     //inclinação
     this.inclinacao1 = 3 * Math.PI / 180;
@@ -45,16 +41,14 @@ class GUI {
         var inclinacao2 = -inclinacao1/4;
         this.webgl.scene.add(new THREE.AxisHelper(20));
         var table1 = this.table1;
-        var table2 = this.table2;
-        
-        var table3 = this.table3;
-        var table4 = this.table4;
-
-        var table5 = this.table5;
-        var table6 = this.table6;
+        var table2 = new MyTable(40, 6.5, 1, 20);
+        var table3 = new MyTable(40, 6.5, 1, 20);
+        var table4 = new MyTable(40, 6.5, 1, 20);
+        var table5 = new MyTable(40, 6.5, 1, 20);
+        var table6 = new MyTable(40, 6.5, 1, 20);
 
         //1º andar
-        this.table2.translateX( table1.largura + table1.largura/4 );
+        table2.translateX( table1.largura + table1.largura/4 );
         this.group.add(table1);
         this.group.add(table2);
         this.group.rotation.z = inclinacao1;
