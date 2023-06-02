@@ -16,6 +16,7 @@ class Webgl {
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setClearColor(0xEEEEEE);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.shadowMapEnabled = true;
 
     // position and point the camera to the center of the scene
     this.camera.position.x = 100;

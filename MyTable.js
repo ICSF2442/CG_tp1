@@ -59,11 +59,11 @@ class MyTable extends THREE.Object3D {
   
   static createMesh(geom) {
     // assign two materials
-    let meshMaterial = new THREE.MeshNormalMaterial();
+    let meshMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
     meshMaterial.side = THREE.DoubleSide;
     let wireFrameMat = new THREE.MeshBasicMaterial();
     wireFrameMat.wireframe = true;
-
+    
     // create a multimaterial
     let mesh = THREE.SceneUtils.createMultiMaterialObject(geom, [meshMaterial, wireFrameMat]);
 

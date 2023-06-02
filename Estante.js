@@ -30,7 +30,7 @@ class Estante extends THREE.Object3D {
 
   static createMesh(geom,armazem) {
   if(armazem==true){
-    let meshMaterial = new THREE.MeshBasicMaterial({ color: 0x808080 }); // Set color to black
+    let meshMaterial = new THREE.MeshLambertMaterial({ color: 0x808080 }); // Set color to black
         meshMaterial.side = THREE.DoubleSide;
 
         let wireFrameMat = new THREE.MeshBasicMaterial();
@@ -42,7 +42,7 @@ class Estante extends THREE.Object3D {
         return mesh;
   }else{
     // assign two materials
-    let meshMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 }); // Set color to black
+    let meshMaterial = new THREE.MeshLambertMaterial({ color: 0xFFFFFF});
     meshMaterial.side = THREE.DoubleSide;
 
     let wireFrameMat = new THREE.MeshBasicMaterial();

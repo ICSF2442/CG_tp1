@@ -16,9 +16,7 @@ class GUI {
     this.group2 = new THREE.Group();
     this.group3 = new THREE.Group();
     this.grouptotal = new THREE.Group();
-
-
-     this.Apoio1 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1,false,false )
+    this.Apoio1 = new Estante(5 , 6*this.table1.altura + this.table1.altura/2 , 1,false,false )
     
     
     var guiVars = {
@@ -27,9 +25,12 @@ class GUI {
           this.webgl.scene.remove(this.webgl.scene.children[i]);
       },
       "drawBox": () => {
+        this.webgl.scene.add(new THREE.AxisHelper(20));
+        this.table = new MyTable(20, 6.5, 1, 20);
         
+        this.webgl.scene.add(this.table);
+
         
-        this.webgl.scene.add(this.table1);
 
       },
 
@@ -205,9 +206,14 @@ class GUI {
         groupE3.translateZ(4*this.table1.largura)
         this.webgl.scene.add(groupE3);
 
-
+        
       },
       "drawArmazem": () =>{
+
+        var ambiColor = "#0c0c0c";
+        var ambientLight = new THREE.AmbientLight(ambiColor);
+        this.webgl.scene.add(ambientLight);
+
       var armazemChao = new Estante(15*this.table1.largura,1.1,15*this.table1.largura,false,true); //Chao
       armazemChao.translateY(-this.Apoio1.altura/4);
 
@@ -247,16 +253,14 @@ class GUI {
         var inclinacao2 = -inclinacao1/4;
         this.webgl.scene.add(new THREE.AxisHelper(20));
         var table1 = this.table1;
-        var table2 = this.table2;
-        
-        var table3 = this.table3;
-        var table4 = this.table4;
-
-        var table5 = this.table5;
-        var table6 = this.table6;
+        var table2 = new MyTable(40, 6.5, 1, 20);
+        var table3 = new MyTable(40, 6.5, 1, 20);
+        var table4 = new MyTable(40, 6.5, 1, 20);
+        var table5 = new MyTable(40, 6.5, 1, 20);
+        var table6 = new MyTable(40, 6.5, 1, 20);
 
         //1º andar
-        this.table2.translateX( table1.largura + table1.largura/4 );
+        table2.translateX( table1.largura + table1.largura/4 );
         this.group.add(table1);
         this.group.add(table2);
         this.group.rotation.z = inclinacao1;
@@ -413,6 +417,79 @@ class GUI {
         groupE3.translateZ(4*this.table1.largura)
         this.webgl.scene.add(groupE3);
 
+
+        //luz 1
+        this.group.castShadow = true;
+
+        var ambiColor = "#0c0c0c";
+        var ambientLight = new THREE.AmbientLight(ambiColor);
+        this.webgl.scene.add(ambientLight);
+        
+        var spotLight = new THREE.SpotLight(0xac6c25);
+        spotLight.position.set(Estante1.largura/2, 10*table1.altura, table1.espessura/2);
+        spotLight.castShadow = true;
+        
+        var pointColor = "#ccffcc";
+        var pointLight = new THREE.PointLight(pointColor);
+        pointLight.position.set(Estante1.largura/2, 10*table1.altura, table1.espessura/2)
+        
+        this.webgl.scene.add(pointLight);
+
+        var sphereLight = new THREE.SphereGeometry(2);
+        var sphereLightMaterial = new THREE.MeshBasicMaterial({color: 0xac6c25});
+        var sphereLightMesh = new THREE.Mesh(sphereLight, sphereLightMaterial);
+        sphereLightMesh.castShadow = true;
+
+        sphereLightMesh.position.set(Estante1.largura/2, 10*table1.altura, table1.espessura/2);
+        
+        this.webgl.scene.add(sphereLightMesh);
+
+        // Create another light ball
+        var spotLight2 = new THREE.SpotLight(0xac6c25);
+        spotLight2.position.set(Estante1.largura/2, 10*table1.altura, 2*table1.largura+table1.espessura/2);
+        spotLight2.castShadow = true;
+        
+        
+        var pointLight2 = new THREE.PointLight(pointColor);
+        pointLight2.position.set(Estante1.largura/2, 10*table1.altura, 2*table1.largura+table1.espessura/2)
+        
+        this.webgl.scene.add(pointLight2);
+
+        var sphereLight2 = new THREE.SphereGeometry(2);
+        var sphereLightMaterial2 = new THREE.MeshBasicMaterial({color: 0xac6c25});
+        var sphereLightMesh2= new THREE.Mesh(sphereLight2, sphereLightMaterial2);
+        sphereLightMesh2.castShadow = true;
+
+        sphereLightMesh2.position.set(Estante1.largura/2, 10*table1.altura, 2*table1.largura+table1.espessura/2);
+        
+        this.webgl.scene.add(sphereLightMesh2);
+
+
+
+        //3 luz
+        var spotLight3 = new THREE.SpotLight(0xac6c25);
+        spotLight3.position.set(Estante1.largura/2, 10*table1.altura, 4*table1.largura+table1.espessura/2);
+        spotLight3.castShadow = true;
+        
+        
+        var pointLight3 = new THREE.PointLight(pointColor);
+        pointLight3.position.set(Estante1.largura/2, 10*table1.altura, 4*table1.largura+table1.espessura/2)
+        
+        this.webgl.scene.add(pointLight3);
+
+        var sphereLight3 = new THREE.SphereGeometry(2);
+        var sphereLightMaterial3 = new THREE.MeshBasicMaterial({color: 0xac6c25});
+        var sphereLightMesh3= new THREE.Mesh(sphereLight2, sphereLightMaterial2);
+        sphereLightMesh3.castShadow = true;
+
+        sphereLightMesh3.position.set(Estante1.largura/2, 10*table1.altura, 4*table1.largura+table1.espessura/2);
+        
+        this.webgl.scene.add(sphereLightMesh3);
+
+
+
+      
+
       },
       "PerspectiveCamera": () => {
         var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -489,6 +566,11 @@ class GUI {
 
       
     };
+    var gui = new dat.GUI({ autoPlace: false });
+    // Set the CSS style for the GUI container
+    gui.domElement.style.position = 'fixed';
+    gui.domElement.style.top = '0';
+    gui.domElement.style.left = '0';
 
     var gui = new dat.GUI({ autoPlace: false });
     var cleanScene = gui.add(guiVars, 'cleanScene');
