@@ -4,6 +4,7 @@ class GUI {
 
     //Caixas
     this.table1 = new MyTable(40, 6.5, 1, 20);
+    this.Robot = new MyRobot(10, 10, 2,20);
     
 
     //inclinação
@@ -491,6 +492,64 @@ class GUI {
       
 
       },
+
+
+      "VerRobot":()=>{
+        const Robot = new MyRobot(10, 10, 2,20);
+        Robot.translateX(-3*this.table1.largura/2 );
+        Robot.translateY(Robot.altura/2 + Robot.raio - this.Apoio1.altura/4); 
+        this.webgl.scene.add(Robot);
+        this.robot = Robot;
+
+
+      },
+
+      "AtivarRobot": () => {
+
+        // Remove the previous robot from the scene, if it exists
+  if (this.robot) {
+    this.webgl.scene.remove(this.robot);
+  }
+
+  
+
+  const Robot = new MyRobot(10, 10, 2, 20);
+  Robot.translateX(-3 * this.table1.largura / 2);
+  Robot.translateY(Robot.altura / 2 + Robot.raio - this.Apoio1.altura / 4);
+  this.webgl.scene.add(Robot);
+
+  // Set the initial movement speed and direction
+  const movementSpeed = 0.5; // Adjust the speed as needed
+  let movementDirection = new THREE.Vector3(0, 0, 1); // Initial direction
+
+  // Animation loop
+  function animate(table) {
+    let valor = table.espessura;
+    requestAnimationFrame(animate);
+
+    // Translate the robot in the desired direction
+    Robot.translateOnAxis(movementDirection, movementSpeed);
+
+    // Get the current position of the robot
+    const currentPosition = Robot.position;
+
+    // Check if the robot reaches the maximum position in the positive Z direction
+    if (currentPosition.z >= 200) {
+      // Change the direction to move in the negative Z direction
+      movementDirection = new THREE.Vector3(0, 0, -1);
+    }
+
+    // Check if the robot reaches the minimum position in the negative Z direction
+    if (currentPosition.z <= -10) {
+      // Change the direction to move in the positive Z direction
+      movementDirection = new THREE.Vector3(0, 0, 1);
+    }
+  }
+
+  // Start the animation loop
+  animate(this.table1);
+  
+      },
       "PerspectiveCamera": () => {
         var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.x = 180;
@@ -571,12 +630,12 @@ class GUI {
     gui.domElement.style.position = 'fixed';
     gui.domElement.style.top = '0';
     gui.domElement.style.left = '0';
-
-    var gui = new dat.GUI({ autoPlace: false });
     var cleanScene = gui.add(guiVars, 'cleanScene');
     var drawTables = gui.add(guiVars, 'drawBox');
     var drawEstante = gui.add(guiVars,'drawEstante');
     var drawArmazem = gui.add(guiVars, 'drawArmazem');
+    var VerRobot = gui.add(guiVars,'VerRobot');
+    var AtivarRobot = gui.add(guiVars, 'AtivarRobot');  
     var perspectiveCamera = gui.add(guiVars, 'PerspectiveCamera');
     var OrthographicCamera = gui.add(guiVars, 'OrthographicCamera');
     var Trackball = gui.add(guiVars, 'Trackball');

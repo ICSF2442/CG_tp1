@@ -5,7 +5,7 @@ class Estante extends THREE.Object3D {
 
   constructor(largura, altura, profundidade, vidro, armazem){
     super();
-    var inclinacao= 90*Math.PI/180;
+    
 
     this.largura = largura;
     this.altura = altura;
